@@ -150,8 +150,6 @@ Once the container is running, open the browser and visit the app using the port
 
 You should see the PHP information page generated automatically by `phpinfo()`. This page displays the PHP configuration, server information, and environment details.
 
-> phpMyAdmin is available at `http://localhost:9001`.
-
 ---
 
 ## 8. Stop the Container
