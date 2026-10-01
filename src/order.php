@@ -52,7 +52,7 @@
     <html>
         <head>
             <title>Food Festival Order Calculator</title>
-            <link rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="assets/css/order.css">
         </head>
     <body>
         <h1>Food Festive Order Calculator</h1>
