@@ -33,7 +33,7 @@
                 <div id="account-preview">
                     <div id="account-preview-heading">
                         <h2><i class="fa-solid fa-bowl-food"></i> Dishes</h2>
-                        <a href="/employee/dishes/new" class="btn btn-sm btn-rounded">Add New Dish</a>
+                        <a href="/new" class="btn btn-sm btn-rounded">Add New Dish</a>
                     </div>
                     <table>
                         <thead>
@@ -56,11 +56,11 @@
                                             </div>
                                         </td>
                                         <td><?= $row['name'] ?></td>
-                                        <td>$<?= number_format($row['price'], 2, '.', ',') ?></td>
+                                        <td>₱<?= number_format($row['price'], 2, '.', ',') ?></td>
                                         <td><?= !empty($row['updated_at']) ? date('M d, Y @ h:i a', strtotime($row['updated_at'])) : '-' ?></td>
                                         <td><?= date('M d, Y @ h:i a', strtotime($row['created_at'])) ?></td>
                                         <td class="action-buttons">
-                                            <a href="/employee/dishes/<?= $row['id'] ?>/edit">Edit</a>
+                                            <a href="/edit?id=<?= $row['id'] ?>">Edit</a>
                                             <a href="#" class="btn-delete" data-id="<?= $row['id'] ?>">Delete</a>
                                         </td>
                                     </tr>

@@ -36,7 +36,7 @@
             $query = "UPDATE `dishes` as `d` SET `d`.`name` = '".$conn->real_escape_string($name)."', `d`.`price` = '".$conn->real_escape_string($price)."', `d`.`thumbnail` = '".$conn->real_escape_string($thumbnail)."', `d`.`updated_at` = '".$last_updated."' WHERE `d`.`id` = '".$conn->real_escape_string($id)."'";
         } 
 
-        if ($conn->query($query)) {
+        if($conn->query($query)) {
             $flag = true;
         }
 

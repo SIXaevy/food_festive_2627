@@ -14,7 +14,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin:latest
+    image: phpmyadmin/phpmyadamin:latest
     container_name: 'dbms_software'
     environment:
       PMA_HOST: mysql_db
