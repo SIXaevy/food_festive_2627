@@ -123,7 +123,7 @@
         return $dishes;
     }  
 
-    function delete_dish($current_user, $id) {
+    function delete_dish($id) {
         global $conn;
         $flag = false;
 
@@ -135,7 +135,7 @@
 
             $query = "DELETE FROM `dishes` as `d` WHERE `d`.`id` = '".$dish['id']."'";
 
-            if ($conn->query($query) && $current_user == $dish['user_id']) {
+            if ($conn->query($query)) {
                 $flag = true;
             }
         }
