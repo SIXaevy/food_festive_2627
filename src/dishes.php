@@ -49,7 +49,7 @@
                         <tbody>
                             <?php if(!empty($dishes)) { ?>
                                 <?php foreach($dishes as $row) { ?>
-                                    <tr>
+                                    <tr class="dish-item">
                                         <td>
                                             <div class="thumbnail-image">
                                                 <img src="data:image/jpeg;base64,<?= base64_encode($row['thumbnail']) ?>" alt="" class="featured-image">

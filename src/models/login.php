@@ -7,7 +7,7 @@
 
         $query = "SELECT * FROM `users` WHERE `email` = '".$conn->real_escape_string($email)."'";
 
-        if ($result = $conn->query($query)) {
+        if($result = $conn->query($query)) {
             $row = $result->fetch_array(MYSQLI_ASSOC);
         }
 

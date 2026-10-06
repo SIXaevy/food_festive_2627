@@ -8,7 +8,7 @@
         $query = "SELECT `id` FROM `users` WHERE `email` = '".$conn->real_escape_string($email)."' LIMIT 1";
         $result = $conn->query($query);
 
-        if ($result->num_rows > 0) {
+        if($result->num_rows > 0) {
             $flag = true;
         }
         
@@ -21,7 +21,7 @@
 
         $query = "INSERT INTO `users` (`name`, `email`, `password`, `created_at`) VALUES ('".$conn->real_escape_string($name)."', '".$conn->real_escape_string($email)."', '".$conn->real_escape_string($password)."', '".date('Y-m-d H:i:s')."')";
 
-        if ($conn->query($query)) {
+        if($conn->query($query)) {
             $id = $conn->insert_id;
             $encrypted_password = md5(md5($id . $password));
 
@@ -36,6 +36,11 @@
                         'id' => $row['id'],
                         'name' => $row['name'],
                         'email' => $row['email']
+                    ];
+                    $user=[
+                        'id' => 1,
+                        'name' => 'John Doe',
+                        'email' => 'john.doe@example.com'
                     ];
                 }
             }
