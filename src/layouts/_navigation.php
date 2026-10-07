@@ -5,23 +5,38 @@
         </a>
     </div>
     <ul id="menu">
-        <?php if(!isset($_SESSION['id'])) { ?>
+        <?php if (!isset($_SESSION['id'])) { ?>
+
             <li>
-                <a href="#about" class="nav-link active">About Us</a> 
+                <a href="#about" class="nav-link active">About Us</a>
             </li>
+
             <li>
                 <a href="#services" class="nav-link">Popular Dishes</a>
             </li>
+
             <li>
                 <a href="#services" class="nav-link">Services</a>
             </li>
+
             <li class="btn-call-out">
-                <a href="tel:+1234567890" class="btn btn-md btn-rounded">Call Us: +1 234 567 890</a>
+                <a href="tel:+1234567890" class="btn btn-md btn-rounded">
+                    Call Us: +1 234 567 890
+                </a>
             </li>
+
         <?php } else { ?>
+
+            <li>
+                <a href="/order" class="nav-link">Order</a>
+            </li>
+
             <li>
                 <div class="dropdown">
-                    <button class="dropdown-btn"><?= $_SESSION['name'] ?></button>
+                    <button class="dropdown-btn">
+                        <?= htmlspecialchars($_SESSION['name']) ?>
+                    </button>
+
                     <div id="drop-down-list" class="dropdown-content">
                         <a href="#">Settings</a>
                         <a href="#">Profile</a>
@@ -29,6 +44,7 @@
                     </div>
                 </div>
             </li>
+
         <?php } ?>
     </ul>
 </nav>
