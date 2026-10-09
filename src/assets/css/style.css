@@ -715,6 +715,99 @@ body.auth-page {
     min-height: 38px;
 }
 
+/* Auth pages: use Poppins on every control (buttons/inputs don't inherit by default) */
+.auth-page .btn,
+.auth-page input,
+.auth-page button {
+    font-family: inherit;
+}
+
+.auth-page #menu .btn {
+    letter-spacing: 0.02em;
+}
+
+.auth-content input[type="submit"] {
+    letter-spacing: 0.03em;
+}
+
+/* Register has two extra fields: tighten spacing so the card fits one screen */
+.auth-page #signup .auth-visual {
+    min-height: 0;
+}
+
+.auth-page #signup .input-control {
+    margin: 0.85rem 0;
+}
+
+.auth-page #signup .auth-visual span {
+    max-width: 12ch;
+    font-size: clamp(2rem, 3.4vw, 2.8rem);
+}
+
+/* Footer matches the cream page instead of the default black */
+.auth-page footer {
+    background: transparent;
+    color: #6f6259;
+    border-top: 1px solid rgb(94 54 34 / 10%);
+}
+
+.auth-page #footer-container {
+    justify-content: flex-start;
+    color: #6f6259;
+}
+
+.auth-page #footer-container > .footer-item {
+    min-width: 0;
+}
+
+.auth-page #subscribe-form {
+    width: 100%;
+}
+
+.auth-page #subscribe-form input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.auth-page footer a,
+.auth-page #site-map a,
+.auth-page .footer-item-heading {
+    color: #2d211b;
+}
+
+.auth-page #social-media a > img {
+    filter: invert(1) brightness(0.25);
+}
+
+.auth-page #social-media {
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.auth-page #social-media a > img {
+    width: 30px;
+}
+
+.auth-page #subscribe-form input[type="text"] {
+    border: 1px solid #e4d8ce;
+    border-radius: 9px;
+    background: #fffdfb;
+    padding: 0.55rem 0.8rem;
+}
+
+.auth-page #subscribe-form button {
+    border: none;
+    border-radius: 9px;
+    background: var(--primary);
+    color: #fff;
+    padding: 0 1rem;
+    cursor: pointer;
+}
+
+.auth-page #subscribe-form button:hover {
+    background: #7c0507;
+}
+
 @media (max-width: 720px) {
     .auth-page nav.container {
         min-height: 70px;

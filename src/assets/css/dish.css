@@ -1,47 +1,353 @@
-#dish #account-preview,
-#new-dish #account-preview,
-#edit-dish #account-preview {
+
+body:has(main.account) {
+    background: #fbf5ef;
+}
+
+body:has(main.account) nav.container {
+    box-sizing: border-box;
+    min-height: 82px;
+    padding: 0.8rem clamp(1rem, 4vw, 2.5rem);
+}
+
+body:has(main.account) #logo {
+    width: clamp(145px, 18vw, 200px);
+    flex: 0 1 auto;
+}
+
+body:has(main.account) ul#menu {
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+body:has(main.account) ul#menu a.nav-link {
+    width: auto;
+    min-width: 0;
+    padding: 0.6rem 1.15rem;
+    border-radius: 999px;
+    color: #44372f;
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+body:has(main.account) ul#menu a.nav-link:hover {
+    background: #fff;
+    color: var(--primary);
+}
+
+body:has(main.account) .dropdown-btn {
+    height: auto;
+    padding: 0.6rem 1.15rem;
+    border: 1px solid #e4d8ce;
+    border-radius: 999px;
+    background: #fffdfb;
+    color: #2d211b;
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    transition: border-color 150ms ease, color 150ms ease;
+}
+
+body:has(main.account) .dropdown-btn:hover,
+body:has(main.account) .dropdown-btn:focus {
+    border-color: var(--primary);
+    color: var(--primary);
+    outline: none;
+}
+
+body:has(main.account) .dropdown-content {
+    top: calc(100% + 0.45rem);
+    right: 0;
+    min-width: 170px;
+    overflow: hidden;
+    border: 1px solid #e4d8ce;
+    border-radius: 14px;
+    background: #fffdfb;
+    box-shadow: 0 18px 45px rgb(68 39 23 / 14%);
+}
+
+body:has(main.account) .dropdown-content a {
+    padding: 0.7rem 1rem;
+    color: #44372f;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+body:has(main.account) .dropdown a:hover {
+    background: #fbf5ef;
+    color: var(--primary);
+}
+
+main.account {
+    position: relative;
+    isolation: isolate;
+    padding: 0 0 clamp(2rem, 5vw, 3.5rem);
+    border: 0;
+    background-color: #fbf5ef;
+    background-image: url('/assets/img/food.png');
+    background-repeat: repeat;
+    background-size: 250px auto;
+}
+
+main.account::before {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: rgb(251 245 239 / 92%);
+    content: "";
+}
+
+main.account > section.container {
+    box-sizing: border-box;
+    padding: 0.5rem clamp(1rem, 4vw, 2.5rem) 0;
+}
+
+/* Sidebar */
+
+#account-container {
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+#account-navigation {
+    box-sizing: border-box;
+    position: sticky;
+    top: 1rem;
+    flex: 0 0 220px;
+    min-width: 0;
+    padding: 1.5rem 1.1rem;
+    border: 1px solid rgb(94 54 34 / 10%);
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 24px 70px rgb(68 39 23 / 10%);
+}
+
+#account-navigation .account-item {
+    padding: 0;
+    letter-spacing: 0;
+    text-transform: none;
+}
+
+#account-navigation .account-item-header {
+    color: var(--primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+#account-navigation .account-item-menu > ul {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0.9rem 0 0;
+    padding: 0;
+}
+
+#account-navigation .account-item-menu ul > li {
+    padding: 0;
+    border: 0;
+    font-size: 0.88rem;
+}
+
+#account-navigation .account-item-menu ul a {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.7rem 0.85rem;
+    border-radius: 10px;
+    color: #44372f;
+    font-weight: 600;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+#account-navigation .account-item-menu ul a i {
+    width: 1.1rem;
+    color: var(--primary);
+    text-align: center;
+    transition: color 150ms ease;
+}
+
+#account-navigation .account-item-menu ul a:hover {
+    background: #fbf5ef;
+    color: var(--primary);
+}
+
+/* Highlight the current section without touching the PHP */
+#dish a[href="/dishes"],
+#new-dish a[href="/dishes"],
+#edit-dish a[href="/dishes"],
+#order a[href="/order"] {
+    background: var(--primary) !important;
+    color: #fff !important;
+}
+
+#dish a[href="/dishes"] i,
+#new-dish a[href="/dishes"] i,
+#edit-dish a[href="/dishes"] i,
+#order a[href="/order"] i {
+    color: #fff !important;
+}
+
+/* Main white card */
+
+#account-preview {
     box-sizing: border-box;
     flex: 1 1 0;
     min-width: 0;
     width: auto;
-    border: 1px solid #f0d8c4;
-    border-radius: 16px;
+    padding: clamp(1.4rem, 4vw, 2.5rem);
+    border: 1px solid rgb(94 54 34 / 10%);
+    border-radius: 22px;
     background: #fff;
-    box-shadow: 0 10px 30px rgb(85 42 18 / 6%);
+    box-shadow: 0 24px 70px rgb(68 39 23 / 14%);
 }
 
-#dish #account-preview-heading {
+#account-preview-heading {
     align-items: center;
     gap: 1rem;
-    padding: 0.25rem 0 1rem;
-    border-bottom: 1px solid #f2e3d8;
+    padding: 0 0 1.25rem;
+    border-bottom: 1px solid #f0e6dc;
 }
 
-#dish #account-preview-heading h2,
-#new-dish #account-preview > h3,
-#edit-dish #account-preview > h3 {
+#account-preview-heading h2,
+#account-preview > h3,
+#account-preview > h1 {
+    color: #2d211b;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+#account-preview-heading h2 i {
+    margin-right: 0.4rem;
     color: var(--primary);
-    font-size: clamp(1.4rem, 3vw, 1.8rem);
-    line-height: 1.25;
+    font-size: 0.8em;
 }
 
-#dish #account-preview-heading .btn {
+#account-preview-heading .btn {
     flex: 0 0 auto;
-    border-radius: 25px;
+    padding: 0.8rem 1.4rem;
+    font-family: inherit;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    transition: background-color 150ms ease;
+}
+
+/* Alerts inside the account area */
+
+main.account .alert {
+    box-sizing: border-box;
+    margin: 0 0 1.25rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+}
+
+main.account .alert-danger {
+    border: 1px solid #f3b8b5;
+    border-left: 5px solid var(--danger);
+    background: #fff3f2;
+    color: #9c1712;
+}
+
+main.account .alert-danger ul {
+    margin: 0;
+    padding-left: 1.1rem;
+}
+
+main.account .alert-success {
+    border: 1px solid #b9dcbc;
+    border-left: 5px solid #2e7d32;
+    background: #eff8ef;
+    color: #1d5422;
+}
+
+/* Footer: cream instead of black, same as the login/register pages */
+
+body:has(main.account) footer {
+    padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
+    border-top: 1px solid rgb(94 54 34 / 10%);
+    background: transparent;
+    color: #6f6259;
+}
+
+body:has(main.account) #footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    align-items: center;
+    justify-content: flex-start;
+    color: #6f6259;
+}
+
+body:has(main.account) #footer-container > .footer-item {
+    min-width: 0;
+}
+
+body:has(main.account) #footer-logo {
+    width: min(100%, 160px);
+    margin: 0;
+}
+
+body:has(main.account) #footer-logo p {
+    font-size: 0.75rem;
+}
+
+body:has(main.account) .footer-item-heading,
+body:has(main.account) #site-map a {
+    color: #2d211b;
+}
+
+body:has(main.account) .footer-item-heading {
+    padding: 0 0 0.65rem;
+}
+
+body:has(main.account) #social-media {
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+body:has(main.account) #social-media a > img {
+    width: 30px;
+    filter: invert(1) brightness(0.25);
+}
+
+body:has(main.account) #subscribe-form {
+    width: 100%;
+}
+
+body:has(main.account) #subscribe-form input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 0.55rem 0.8rem;
+    border: 1px solid #e4d8ce;
+    border-radius: 9px;
+    background: #fffdfb;
+    font-family: inherit;
+}
+
+body:has(main.account) #subscribe-form button {
+    min-height: 38px;
+    padding: 0 1rem;
+    border: 0;
+    border-radius: 9px;
     background: var(--primary);
     color: #fff;
-    transition: background-color 150ms ease, transform 150ms ease;
+    font-family: inherit;
+    cursor: pointer;
 }
 
-#dish #account-preview-heading .btn:hover {
+body:has(main.account) #subscribe-form button:hover {
     background: #7c0507;
-    transform: translateY(-1px);
 }
+
+/* ---------- Dishes list ---------- */
 
 #dish .dish-page-intro {
-    margin: 1rem 0 1.25rem;
-    color: #68615c;
+    margin: 1.1rem 0 1.5rem;
+    color: #766a62;
     font-size: 0.9rem;
     line-height: 1.6;
 }
@@ -49,53 +355,66 @@
 #dish .dish-table-wrap {
     width: 100%;
     overflow-x: auto;
-    border: 1px solid #f0d8c4;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 8px 24px rgb(85 42 18 / 5%);
+    border: 1px solid #e4d8ce;
+    border-radius: 16px;
+    background: #fffdfb;
     -webkit-overflow-scrolling: touch;
 }
 
 #dish .dish-table-wrap table {
-    min-width: 760px;
+    min-width: 680px;
     margin: 0;
     border-collapse: separate;
     border-spacing: 0;
-    font-size: 0.82rem;
+    font-size: 0.85rem;
 }
 
 #dish .dish-table-wrap th {
-    padding: 0.9rem 1rem;
+    padding: 0.95rem 0.9rem;
     border: 0;
-    border-bottom: 1px solid #f0d8c4;
-    background: #fff8f1;
-    color: #6e241f;
+    border-bottom: 1px solid #e4d8ce;
+    background: #fbf5ef;
+    color: #44372f;
     font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     white-space: nowrap;
 }
 
 #dish .dish-table-wrap td {
-    padding: 0.85rem 1rem;
+    padding: 0.85rem 0.9rem;
     border: 0;
-    border-bottom: 1px solid #f3eee9;
-    color: #514943;
+    border-bottom: 1px solid #f0e6dc;
+    color: #5a4e46;
     vertical-align: middle;
     white-space: nowrap;
+}
+
+/* Let the two date columns wrap so the action buttons never get cut off */
+#dish .dish-table-wrap td:nth-child(4),
+#dish .dish-table-wrap td:nth-child(5) {
+    min-width: 120px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    white-space: normal;
+}
+
+#dish .dish-table-wrap tbody tr,
+#dish .dish-table-wrap tbody tr:nth-child(even) {
+    background: transparent;
+}
+
+#dish .dish-table-wrap tbody tr:hover {
+    background: #fbf5ef;
 }
 
 #dish .dish-table-wrap tbody tr:last-child td {
     border-bottom: 0;
 }
 
-#dish .dish-table-wrap tbody tr:hover {
-    background: #fffaf6;
-}
-
 #dish .dish-table-wrap .dish-name {
-    color: #302722;
+    color: #2d211b;
     font-weight: 700;
 }
 
@@ -106,41 +425,53 @@
 
 #dish .dish-table-wrap .thumbnail-image {
     box-sizing: border-box;
-    width: 54px;
-    height: 54px;
+    width: 56px;
+    height: 56px;
+    margin: 0;
     overflow: hidden;
-    border: 1px solid #f0d8c4;
-    border-radius: 10px;
-    background: #fff8f1;
-}
-
-#dish .dish-table-wrap .action-buttons {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
+    border: 1px solid #e4d8ce;
+    border-radius: 12px;
+    background: #fbf5ef;
 }
 
 #dish .dish-table-wrap .action-buttons a {
     display: inline-block;
-    padding: 0.4rem 0.75rem;
-    border: 1px solid var(--primary);
-    border-radius: 20px;
-    color: var(--primary);
+    margin-right: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    border: 1px solid #e4d8ce;
+    border-radius: 999px;
+    background: #fff;
+    color: #44372f;
     font-size: 0.68rem;
     font-weight: 700;
+    letter-spacing: 0.04em;
     line-height: 1.2;
     text-decoration: none;
-    transition: color 150ms ease, background-color 150ms ease;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+#dish .dish-table-wrap .action-buttons a:last-child {
+    margin-right: 0;
 }
 
 #dish .dish-table-wrap .action-buttons a:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+#dish .dish-table-wrap .action-buttons a.btn-delete {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+#dish .dish-table-wrap .action-buttons a.btn-delete:hover {
     background: var(--primary);
     color: #fff;
 }
 
 #dish .dish-table-wrap .dish-empty {
-    padding: 2rem 1rem;
-    color: #74665c;
+    padding: 2.5rem 1rem;
+    color: #766a62;
     text-align: center;
 }
 
@@ -148,50 +479,57 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin: 1.5rem 0 0;
     padding: 0;
+    list-style: none;
 }
 
 #dish #pagination ul a {
-    padding: 0.5rem 0.9rem;
-    border-color: #f0d8c4;
+    margin: 0;
+    padding: 0.55rem 1rem;
+    border: 1px solid #e4d8ce;
+    border-radius: 999px;
     background: #fff;
-    color: #6e241f;
+    color: #44372f;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
 }
 
-#dish #pagination a.active,
 #dish #pagination ul a:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+#dish #pagination ul a.active {
     border-color: var(--primary);
     background: var(--primary);
     color: #fff;
 }
 
-#new-dish #account-preview,
-#edit-dish #account-preview {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: clamp(1.25rem, 4vw, 2rem);
+#dish #pagination li.disabled {
+    opacity: 0.45;
 }
+
+/* ---------- Add / Edit dish form ---------- */
 
 #new-dish #account-preview > h3,
 #edit-dish #account-preview > h3 {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #f0e6dc;
 }
 
 #new-dish #form-dish,
 #edit-dish #form-dish {
-    max-width: 680px;
+    max-width: 620px;
 }
 
 #new-dish #form-dish form,
 #edit-dish #form-dish form {
-    box-sizing: border-box;
     width: 100%;
     margin: 0;
-    padding: clamp(1.1rem, 3vw, 1.75rem);
-    border: 1px solid #f0d8c4;
-    border-radius: 14px;
-    background: #fff;
-    box-shadow: 0 8px 24px rgb(85 42 18 / 5%);
+    padding: 0;
 }
 
 #new-dish #form-dish .input-control,
@@ -202,23 +540,24 @@
 #new-dish #form-dish label,
 #edit-dish #form-dish label {
     margin-bottom: 0.5rem;
-    color: #39302b;
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
+    color: #44372f;
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
 }
 
 #new-dish #form-dish .input-field,
 #edit-dish #form-dish .input-field {
     box-sizing: border-box;
     width: 100%;
-    min-height: 46px;
-    padding: 0.7rem 0.85rem;
-    border: 1px solid #ded5ce;
-    border-radius: 8px;
-    background: #fff;
-    color: #252525;
+    min-height: 48px;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid #e4d8ce;
+    border-radius: 9px;
+    background: #fffdfb;
+    color: #2d211b;
     font: inherit;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 #new-dish #form-dish .input-field:focus,
@@ -228,23 +567,39 @@
     box-shadow: 0 0 0 3px rgb(193 23 26 / 12%);
 }
 
-#new-dish #form-dish input[type="submit"],
-#edit-dish #form-dish input[type="submit"] {
-    min-height: 46px;
-    padding: 0.75rem 1.5rem;
+#new-dish #form-dish input[type="file"].input-field,
+#edit-dish #form-dish input[type="file"].input-field {
+    padding: 0.55rem 0.7rem;
+    color: #766a62;
+    font-size: 0.85rem;
+}
+
+#new-dish #form-dish input[type="file"]::file-selector-button,
+#edit-dish #form-dish input[type="file"]::file-selector-button {
+    margin-right: 0.9rem;
+    padding: 0.5rem 1.1rem;
     border: 0;
-    border-radius: 25px;
+    border-radius: 999px;
     background: var(--primary);
     color: #fff;
     font: inherit;
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     font-weight: 700;
     cursor: pointer;
+    transition: background-color 150ms ease;
 }
 
-#new-dish #form-dish input[type="submit"]:hover,
-#edit-dish #form-dish input[type="submit"]:hover {
+#new-dish #form-dish input[type="file"]::file-selector-button:hover,
+#edit-dish #form-dish input[type="file"]::file-selector-button:hover {
     background: #7c0507;
+}
+
+#new-dish #form-dish small,
+#edit-dish #form-dish small {
+    display: block;
+    margin-top: 0.5rem;
+    color: #766a62;
+    font-size: 0.78rem;
 }
 
 #new-dish #form-dish .thumbnail img,
@@ -253,32 +608,60 @@
     max-width: 100%;
     height: auto;
     margin: 0 0 1.25rem;
-    border: 1px solid #f0d8c4;
-    border-radius: 12px;
+    border: 1px solid #e4d8ce;
+    border-radius: 14px;
 }
 
+#new-dish #form-dish input[type="submit"],
+#edit-dish #form-dish input[type="submit"] {
+    min-width: 180px;
+    min-height: 48px;
+    padding: 0.8rem 1.8rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 150ms ease;
+}
+
+#new-dish #form-dish input[type="submit"]:hover,
+#edit-dish #form-dish input[type="submit"]:hover {
+    background: #7c0507;
+}
+
+/* ---------- Responsive ---------- */
+
 @media (max-width: 760px) {
-    #dish #account-container,
-    #new-dish #account-container,
-    #edit-dish #account-container {
+    #account-container {
         flex-direction: column;
+        align-items: stretch;
     }
 
-    #dish #account-navigation,
-    #new-dish #account-navigation,
-    #edit-dish #account-navigation {
-        min-width: 0;
-        padding: 0 0.75rem;
-        border-right: 0;
-        border-bottom: 1px solid #f0d8c4;
+    #account-navigation {
+        position: static;
+        flex: 0 0 auto;
+        padding: 1.1rem 1rem;
     }
 
-    #dish .account-item-menu > ul,
-    #new-dish .account-item-menu > ul,
-    #edit-dish .account-item-menu > ul {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0 1rem;
+    #account-navigation .account-item-menu > ul {
+        grid-auto-flow: column;
+        grid-auto-columns: 1fr;
+        gap: 0.5rem;
+    }
+
+    #account-navigation .account-item-menu ul a {
+        justify-content: center;
+    }
+
+    #new-dish #form-dish input[type="submit"],
+    #edit-dish #form-dish input[type="submit"] {
+        width: 100%;
     }
 }
 
@@ -286,5 +669,14 @@
     #dish #account-preview-heading {
         align-items: flex-start;
         flex-direction: column;
+    }
+
+    body:has(main.account) #footer-container {
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    body:has(main.account) #footer-container > .footer-item:first-child {
+        flex-basis: 100%;
     }
 }
