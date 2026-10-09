@@ -7,15 +7,33 @@
         $dish = view_dish($_GET['id']);
         $dish_id = $dish['id'];
         if(isset($_POST['submit'])) {
-            $errors = validate_form_dish($_POST['name'], $_POST['price'], $_POST['thumbnail'], $_FILES['thumbnail']['tmp_name']);
+            $thumbnail_upload = $_FILES['thumbnail'] ?? [
+                'tmp_name' => '',
+                'size' => 0,
+                'error' => UPLOAD_ERR_NO_FILE,
+            ];
+            $_POST['thumbnail'] = $_POST['thumbnail'] ?? base64_encode($dish['thumbnail']);
+            $errors = validate_form_dish(
+                $_POST['name'],
+                $_POST['price'],
+                $thumbnail_upload['size'],
+                $thumbnail_upload['error'],
+                false
+            );
             if(empty($errors)) {
-                $thumbnail = (empty($_FILES['thumbnail']['tmp_name'])) ? $dish['thumbnail'] : file_get_contents($_FILES['thumbnail']['tmp_name']);
-                $save_dish = save_dish($_POST['name'], $_SESSION['id'], $_POST['price'], $thumbnail, $dish_id);
-                if($save_dish) {
-                    $_SESSION['flash_message'] = "You have successfully updated a dish.";
-                    header("Location: /dishes");
+                $thumbnail = $thumbnail_upload['error'] === UPLOAD_ERR_NO_FILE
+                    ? $dish['thumbnail']
+                    : file_get_contents($thumbnail_upload['tmp_name']);
+                if($thumbnail === false) {
+                    $errors[] = "Could not read the uploaded image. Please try again.";
                 } else {
-                    $errors[] = "Could not update the dish. Please try again later.";
+                    $save_dish = save_dish($_POST['name'], $_SESSION['id'], $_POST['price'], $thumbnail, $dish_id);
+                    if($save_dish) {
+                        $_SESSION['flash_message'] = "You have successfully updated a dish.";
+                        header("Location: /dishes");
+                    } else {
+                        $errors[] = "Could not update the dish. Please try again later.";
+                    }
                 }
             }
         } else {

@@ -26,12 +26,10 @@
                 $user_type = 'user';
                 $user = save_registration($_POST['name'],$_POST['email'], $_POST['password']);
                 if(!empty($user)) {
-                    $_SESSION['id'] = $user['id'];
-                    $_SESSION['name'] = $user['name'];
-
-                    header("Location: /account");
+                    header("Location: /login");
+                    exit;
                 } else {
-                    $errors[] = "There was an error logging in your account.";
+                    $errors[] = "There was an error registering your account.";
                 }
             } else {
                 $errors[] = "Email address already exist.";

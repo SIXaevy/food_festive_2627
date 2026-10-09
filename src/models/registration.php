@@ -37,11 +37,6 @@
                         'name' => $row['name'],
                         'email' => $row['email']
                     ];
-                    $user=[
-                        'id' => 1,
-                        'name' => 'John Doe',
-                        'email' => 'john.doe@example.com'
-                    ];
                 }
             }
         }

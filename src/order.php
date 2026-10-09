@@ -91,87 +91,79 @@
                 <div class="order-page">
 
                     <h1>Food Festive Order Calculator</h1>
+                    <p class="order-intro">Enter your customer and dish details to calculate the order total.</p>
 
                     <form method="POST" action="/order">
+                        <div class="order-field">
+                            <label for="customer_name">Customer Name</label>
+                            <input
+                                type="text"
+                                id="customer_name"
+                                name="customer_name"
+                                placeholder="Enter customer name"
+                                value="<?= htmlspecialchars($form_data['customer_name'], ENT_QUOTES, 'UTF-8') ?>"
+                                required
+                            >
+                        </div>
 
-                        <label for="customer_name">
-                            Customer Name:
-                        </label>
+                        <div class="order-field">
+                            <label for="food_item">Food Item</label>
+                            <select id="food_item" name="food_item" required>
+                                <option value="">-- Select Food Item --</option>
+                                <?php foreach ($dishes as $dish) { ?>
+                                    <option
+                                        value="<?= (int) $dish['id'] ?>"
+                                        data-price="<?= htmlspecialchars((string) $dish['price'], ENT_QUOTES, 'UTF-8') ?>"
+                                        <?= (string) $form_data['food_item'] === (string) $dish['id'] ? 'selected' : '' ?>
+                                    >
+                                        <?= htmlspecialchars($dish['name'], ENT_QUOTES, 'UTF-8') ?>
+                                    </option>
+                                <?php } ?>
+                            </select>
+                        </div>
 
-                        <input
-                            type="text"
-                            id="customer_name"
-                            name="customer_name"
-                            value="<?= htmlspecialchars($form_data['customer_name'], ENT_QUOTES, 'UTF-8') ?>"
-                            required
-                        >
+                        <div class="order-field">
+                            <label for="price">Price per Serving</label>
+                            <input
+                                type="number"
+                                id="price"
+                                name="price"
+                                step="0.01"
+                                min="0"
+                                placeholder="Set by selected dish"
+                                value="<?= $price > 0 ? number_format($price, 2, '.', '') : '' ?>"
+                                readonly
+                                required
+                            >
+                        </div>
 
-                        <label for="food_item">
-                            Food Item:
-                        </label>
+                        <div class="order-field">
+                            <label for="quantity">Quantity</label>
+                            <input
+                                type="number"
+                                id="quantity"
+                                name="quantity"
+                                min="1"
+                                step="1"
+                                placeholder="Enter quantity"
+                                value="<?= htmlspecialchars((string) $form_data['quantity'], ENT_QUOTES, 'UTF-8') ?>"
+                                required
+                            >
+                        </div>
 
-                        <select
-                            id="food_item"
-                            name="food_item"
-                            required
-                        >
-                            <option value="">
-                                -- Select Food Item --
-                            </option>
-
-                            <?php foreach ($dishes as $dish) { ?>
-                                <option
-                                    value="<?= (int) $dish['id'] ?>"
-                                    data-price="<?= htmlspecialchars((string) $dish['price'], ENT_QUOTES, 'UTF-8') ?>"
-                                    <?= (string) $form_data['food_item'] === (string) $dish['id'] ? 'selected' : '' ?>
-                                >
-                                    <?= htmlspecialchars($dish['name'], ENT_QUOTES, 'UTF-8') ?>
-                                </option>
-                            <?php } ?>
-                        </select>
-
-                        <label for="price">
-                            Price per Serving:
-                        </label>
-
-                        <input
-                            type="number"
-                            id="price"
-                            name="price"
-                            step="0.01"
-                            min="0"
-                            value="<?= $price > 0 ? number_format($price, 2, '.', '') : '' ?>"
-                            readonly
-                            required
-                        >
-
-                        <label for="quantity">
-                            Quantity:
-                        </label>
-
-                        <input
-                            type="number"
-                            id="quantity"
-                            name="quantity"
-                            min="1"
-                            step="1"
-                            value="<?= htmlspecialchars((string) $form_data['quantity'], ENT_QUOTES, 'UTF-8') ?>"
-                            required
-                        >
-
-                        <label for="amount_paid">
-                            Amount Paid:
-                        </label>
-
-                        <input
-                            type="number"
-                            id="amount_paid"
-                            name="amount_paid"
-                            step="0.01"
-                            min="0"
-                            value="<?= htmlspecialchars((string) $form_data['amount_paid'], ENT_QUOTES, 'UTF-8') ?>"
-                            required
-                        >
+                        <div class="order-field">
+                            <label for="amount_paid">Amount Paid</label>
+                            <input
+                                type="number"
+                                id="amount_paid"
+                                name="amount_paid"
+                                step="0.01"
+                                min="0"
+                                placeholder="Enter amount"
+                                value="<?= htmlspecialchars((string) $form_data['amount_paid'], ENT_QUOTES, 'UTF-8') ?>"
+                                required
+                            >
+                        </div>
 
                         <input
                             type="submit"

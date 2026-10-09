@@ -13,8 +13,9 @@
         </div>
         <div class="input-control">
             <label for="category">Thumbnail</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?= MAX_DISH_IMAGE_SIZE ?>">
             <input type="file" name="thumbnail" accept="image/*" class="input-field input-sm" />
-            <input type="hidden" value="<?= $_POST['thumbnail'] ?>" name="thumbnail">
+            <small>Maximum image size: 10 MB.</small>
         </div>
         <?php if(!empty($_POST['thumbnail'])) { ?>
             <div class="thumbnail">

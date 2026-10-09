@@ -1,0 +1,290 @@
+#dish #account-preview,
+#new-dish #account-preview,
+#edit-dish #account-preview {
+    box-sizing: border-box;
+    flex: 1 1 0;
+    min-width: 0;
+    width: auto;
+    border: 1px solid #f0d8c4;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgb(85 42 18 / 6%);
+}
+
+#dish #account-preview-heading {
+    align-items: center;
+    gap: 1rem;
+    padding: 0.25rem 0 1rem;
+    border-bottom: 1px solid #f2e3d8;
+}
+
+#dish #account-preview-heading h2,
+#new-dish #account-preview > h3,
+#edit-dish #account-preview > h3 {
+    color: var(--primary);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    line-height: 1.25;
+}
+
+#dish #account-preview-heading .btn {
+    flex: 0 0 auto;
+    border-radius: 25px;
+    background: var(--primary);
+    color: #fff;
+    transition: background-color 150ms ease, transform 150ms ease;
+}
+
+#dish #account-preview-heading .btn:hover {
+    background: #7c0507;
+    transform: translateY(-1px);
+}
+
+#dish .dish-page-intro {
+    margin: 1rem 0 1.25rem;
+    color: #68615c;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+#dish .dish-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #f0d8c4;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgb(85 42 18 / 5%);
+    -webkit-overflow-scrolling: touch;
+}
+
+#dish .dish-table-wrap table {
+    min-width: 760px;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.82rem;
+}
+
+#dish .dish-table-wrap th {
+    padding: 0.9rem 1rem;
+    border: 0;
+    border-bottom: 1px solid #f0d8c4;
+    background: #fff8f1;
+    color: #6e241f;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+#dish .dish-table-wrap td {
+    padding: 0.85rem 1rem;
+    border: 0;
+    border-bottom: 1px solid #f3eee9;
+    color: #514943;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+#dish .dish-table-wrap tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+#dish .dish-table-wrap tbody tr:hover {
+    background: #fffaf6;
+}
+
+#dish .dish-table-wrap .dish-name {
+    color: #302722;
+    font-weight: 700;
+}
+
+#dish .dish-table-wrap .dish-price {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+#dish .dish-table-wrap .thumbnail-image {
+    box-sizing: border-box;
+    width: 54px;
+    height: 54px;
+    overflow: hidden;
+    border: 1px solid #f0d8c4;
+    border-radius: 10px;
+    background: #fff8f1;
+}
+
+#dish .dish-table-wrap .action-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+#dish .dish-table-wrap .action-buttons a {
+    display: inline-block;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--primary);
+    border-radius: 20px;
+    color: var(--primary);
+    font-size: 0.68rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    transition: color 150ms ease, background-color 150ms ease;
+}
+
+#dish .dish-table-wrap .action-buttons a:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+#dish .dish-table-wrap .dish-empty {
+    padding: 2rem 1rem;
+    color: #74665c;
+    text-align: center;
+}
+
+#dish #pagination ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+}
+
+#dish #pagination ul a {
+    padding: 0.5rem 0.9rem;
+    border-color: #f0d8c4;
+    background: #fff;
+    color: #6e241f;
+}
+
+#dish #pagination a.active,
+#dish #pagination ul a:hover {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #fff;
+}
+
+#new-dish #account-preview,
+#edit-dish #account-preview {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(1.25rem, 4vw, 2rem);
+}
+
+#new-dish #account-preview > h3,
+#edit-dish #account-preview > h3 {
+    margin-bottom: 1.25rem;
+}
+
+#new-dish #form-dish,
+#edit-dish #form-dish {
+    max-width: 680px;
+}
+
+#new-dish #form-dish form,
+#edit-dish #form-dish form {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    padding: clamp(1.1rem, 3vw, 1.75rem);
+    border: 1px solid #f0d8c4;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 8px 24px rgb(85 42 18 / 5%);
+}
+
+#new-dish #form-dish .input-control,
+#edit-dish #form-dish .input-control {
+    margin: 0 0 1.25rem;
+}
+
+#new-dish #form-dish label,
+#edit-dish #form-dish label {
+    margin-bottom: 0.5rem;
+    color: #39302b;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+}
+
+#new-dish #form-dish .input-field,
+#edit-dish #form-dish .input-field {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 46px;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid #ded5ce;
+    border-radius: 8px;
+    background: #fff;
+    color: #252525;
+    font: inherit;
+    font-size: 0.9rem;
+}
+
+#new-dish #form-dish .input-field:focus,
+#edit-dish #form-dish .input-field:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(193 23 26 / 12%);
+}
+
+#new-dish #form-dish input[type="submit"],
+#edit-dish #form-dish input[type="submit"] {
+    min-height: 46px;
+    padding: 0.75rem 1.5rem;
+    border: 0;
+    border-radius: 25px;
+    background: var(--primary);
+    color: #fff;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#new-dish #form-dish input[type="submit"]:hover,
+#edit-dish #form-dish input[type="submit"]:hover {
+    background: #7c0507;
+}
+
+#new-dish #form-dish .thumbnail img,
+#edit-dish #form-dish .thumbnail img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 1.25rem;
+    border: 1px solid #f0d8c4;
+    border-radius: 12px;
+}
+
+@media (max-width: 760px) {
+    #dish #account-container,
+    #new-dish #account-container,
+    #edit-dish #account-container {
+        flex-direction: column;
+    }
+
+    #dish #account-navigation,
+    #new-dish #account-navigation,
+    #edit-dish #account-navigation {
+        min-width: 0;
+        padding: 0 0.75rem;
+        border-right: 0;
+        border-bottom: 1px solid #f0d8c4;
+    }
+
+    #dish .account-item-menu > ul,
+    #new-dish .account-item-menu > ul,
+    #edit-dish .account-item-menu > ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #dish #account-preview-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

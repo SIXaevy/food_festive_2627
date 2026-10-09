@@ -1,7 +1,9 @@
 <?php
     require "db/db.php";
 
-    function validate_form_dish($name, $price, $thumbnail, $thumbnail_tmp_name) {
+    const MAX_DISH_IMAGE_SIZE = 10 * 1024 * 1024;
+
+    function validate_form_dish($name, $price, $thumbnail_size, $thumbnail_error, $thumbnail_required = true) {
         $validation_errors = [];
 
         if(!$name) {
@@ -12,12 +14,20 @@
             $validation_errors[] = "Price is required.";
         }
 
-        if(!$thumbnail && !$thumbnail_tmp_name) {
+        if($thumbnail_required && $thumbnail_error === UPLOAD_ERR_NO_FILE) {
             $validation_errors[] = "The thumbnail of the blog is required.";
         }
 
-        if(!empty($name) && strlen($name < 20)) {
-            $validation_errors[] = "The name of the dish must have atleast 5 characters.";
+        if($thumbnail_error === UPLOAD_ERR_INI_SIZE || $thumbnail_error === UPLOAD_ERR_FORM_SIZE) {
+            $validation_errors[] = "The image must be no larger than 10 MB.";
+        } elseif($thumbnail_error !== UPLOAD_ERR_OK && $thumbnail_error !== UPLOAD_ERR_NO_FILE) {
+            $validation_errors[] = "The image upload failed. Please try again.";
+        } elseif($thumbnail_error === UPLOAD_ERR_OK && $thumbnail_size > MAX_DISH_IMAGE_SIZE) {
+            $validation_errors[] = "The image must be no larger than 10 MB.";
+        }
+
+        if(!empty($name) && strlen($name) < 5) {
+            $validation_errors[] = "The name of the dish must have at least 5 characters.";
         }
 
         return $validation_errors;

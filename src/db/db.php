@@ -1,4 +1,6 @@
 <?php
+    date_default_timezone_set('Asia/Manila');
+
     $servername = "mysql_db";
     $username = "root";
     $password = "root";

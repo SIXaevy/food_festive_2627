@@ -35,41 +35,46 @@
                         <h2><i class="fa-solid fa-bowl-food"></i> Dishes</h2>
                         <a href="/new" class="btn btn-sm btn-rounded">Add New Dish</a>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Thumbnail</th>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Last Updated</th>
-                                <th>Date Created</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if(!empty($dishes)) { ?>
-                                <?php foreach($dishes as $row) { ?>
-                                    <tr class="dish-item">
-                                        <td>
-                                            <div class="thumbnail-image">
-                                                <img src="data:image/jpeg;base64,<?= base64_encode($row['thumbnail']) ?>" alt="" class="featured-image">
-                                            </div>
-                                        </td>
-                                        <td><?= $row['name'] ?></td>
-                                        <td>₱<?= number_format($row['price'], 2, '.', ',') ?></td>
-                                        <td><?= !empty($row['updated_at']) ? date('M d, Y @ h:i a', strtotime($row['updated_at'])) : '-' ?></td>
-                                        <td><?= date('M d, Y @ h:i a', strtotime($row['created_at'])) ?></td>
-                                        <td class="action-buttons">
-                                            <a href="/edit?id=<?= $row['id'] ?>">Edit</a>
-                                            <a href="#" class="btn-delete" data-id="<?= $row['id'] ?>">Delete</a>
-                                        </td>
+                    <p class="dish-page-intro">Manage your menu, update prices, and keep your dishes up to date.</p>
+                    <div class="dish-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Thumbnail</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Last Updated</th>
+                                    <th scope="col">Date Created</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if(!empty($dishes)) { ?>
+                                    <?php foreach($dishes as $row) { ?>
+                                        <tr class="dish-item">
+                                            <td>
+                                                <div class="thumbnail-image">
+                                                    <img src="data:image/jpeg;base64,<?= base64_encode($row['thumbnail']) ?>" alt="<?= htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') ?>" class="featured-image">
+                                                </div>
+                                            </td>
+                                            <td class="dish-name"><?= htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') ?></td>
+                                            <td class="dish-price">₱<?= number_format($row['price'], 2, '.', ',') ?></td>
+                                            <td><?= !empty($row['updated_at']) ? date('M d, Y @ h:i a', strtotime($row['updated_at'])) : '-' ?></td>
+                                            <td><?= date('M d, Y @ h:i a', strtotime($row['created_at'])) ?></td>
+                                            <td class="action-buttons">
+                                                <a href="/edit?id=<?= (int) $row['id'] ?>">Edit</a>
+                                                <a href="#" class="btn-delete" data-id="<?= (int) $row['id'] ?>">Delete</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                <?php } else { ?>
+                                    <tr>
+                                        <td colspan="6" class="dish-empty">No dishes to be displayed...</td>
                                     </tr>
                                 <?php } ?>
-                            <?php } else { ?>
-                                <td colspan="6">No dishes to be displayed...</td>
-                            <?php } ?>
-                        </tbody>
-                    </table>  
+                            </tbody>
+                        </table>
+                    </div>
                     <!-- Pagination -->
                     <?php if(!empty($dishes)) { ?>
                         <div id="pagination">

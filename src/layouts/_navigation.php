@@ -1,6 +1,6 @@
 <nav class="container">
     <div id="logo">
-        <a href="/employee/account">
+        <a href="/account">
             <img src="/assets/img/logo.png" alt="Food festive">
         </a>
     </div>
