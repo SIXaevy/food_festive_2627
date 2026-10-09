@@ -1,11 +1,21 @@
 <nav class="container">
     <div id="logo">
-        <a href="/account">
+        <a href="<?= isset($_SESSION['id']) ? '/account' : '/login' ?>">
             <img src="/assets/img/logo.png" alt="Food festive">
         </a>
     </div>
     <ul id="menu">
-        <?php if (!isset($_SESSION['id'])) { ?>
+        <?php if (!empty($auth_page)) { ?>
+            <li>
+                <?php if ($auth_page === 'register') { ?>
+                    <span>Already a member?</span>
+                    <a href="/login" class="btn btn-sm btn-rounded">Log in</a>
+                <?php } else { ?>
+                    <span>New to Food Festive?</span>
+                    <a href="/register" class="btn btn-sm btn-rounded">Create account</a>
+                <?php } ?>
+            </li>
+        <?php } elseif (!isset($_SESSION['id'])) { ?>
 
             <li>
                 <a href="#about" class="nav-link active">About Us</a>

@@ -10,4 +10,4 @@
         <link rel="stylesheet" href="/assets/css/dish.css">
         <title>Food Festive</title>
     </head>
-    <body>
+    <body class="<?= !empty($auth_page) ? 'auth-page' : '' ?>">

@@ -2,6 +2,7 @@
     include "models/registration.php";
     include "session.php";
 
+    $auth_page = 'register';
     $errors = [];
 
     if(isset($_SESSION['id'])) {
@@ -52,28 +53,38 @@
                     <?php include "layouts/_errors.php" ?>
                 <?php } ?>
                 <div class="form card">
-                    <h1>Sign up to your account.</h1>
-                    <form  method="post">
-                        <div class="input-control">
-                            <label for="name">Name: </label>
-                            <input type="text" name="name" class="input-field input-md" value="<?= $_POST['name'] ?>" />
-                        </div>
-                        <div class="input-control">
-                            <label for="name">Email: </label>
-                            <input type="email" name="email" class="input-field input-md" value="<?= $_POST['email'] ?>" />
-                        </div>
-                        <div class="input-control">
-                            <label for="name">Password: </label>
-                            <input type="password" name="password" class="input-field input-md" value="<?= $_POST['password'] ?>" />
-                        </div>
-                        <div class="input-control">
-                            <label for="name">Confirm Password: </label>
-                            <input type="password" name="confirm_password" class="input-field input-md" value="" />
-                        </div>
-                        <div class="input-control">
-                            <input type="submit" name="submit" class="btn btn-sm btn-rounded" value="Register" />
-                        </div>
-                    </form>
+                    <div class="auth-visual" aria-hidden="true">
+                        <span>Gather around something delicious.</span>
+                    </div>
+                    <div class="auth-content">
+                        <p class="auth-eyebrow">Join Food Festive</p>
+                        <h1>Create your account.</h1>
+                        <p class="auth-description">A few details and you’ll be ready to get started.</p>
+                        <form method="post">
+                            <div class="input-control">
+                                <label for="register-name">Name</label>
+                                <input id="register-name" type="text" name="name" class="input-field input-md" value="<?= htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') ?>" autocomplete="name" required />
+                            </div>
+                            <div class="input-control">
+                                <label for="register-email">Email address</label>
+                                <input id="register-email" type="email" name="email" class="input-field input-md" value="<?= htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') ?>" autocomplete="email" required />
+                            </div>
+                            <div class="input-control">
+                                <label for="register-password">Password</label>
+                                <input id="register-password" type="password" name="password" class="input-field input-md" autocomplete="new-password" required />
+                            </div>
+                            <div class="input-control">
+                                <label for="confirm-password">Confirm password</label>
+                                <input id="confirm-password" type="password" name="confirm_password" class="input-field input-md" autocomplete="new-password" required />
+                            </div>
+                            <div class="input-control">
+                                <input type="submit" name="submit" class="btn btn-md btn-rounded" value="Create account" />
+                            </div>
+                            <div id="signup-account">
+                                <p>Already have an account? <a href="/login">Log in</a></p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>

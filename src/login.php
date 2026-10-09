@@ -2,6 +2,7 @@
     include "./models/login.php";
     include "./session.php";
 
+    $auth_page = 'login';
     $errors = []; 
 
     if(isset($_SESSION['id'])) {
@@ -42,23 +43,30 @@
                     <?php include "layouts/_errors.php" ?>
                 <?php } ?>
                 <div class="form card">
-                    <h1>Log in to your account.</h1>
-                    <form  method="post">
-                        <div class="input-control">
-                            <label for="name">Email: </label>
-                            <input type="email" name="email" class="input-field input-md" value="<?= $_POST['email'] ?>" />
-                        </div>
-                        <div class="input-control">
-                            <label for="name">Password: </label>
-                            <input type="password" name="password" class="input-field input-md" value="<?= $_POST['password'] ?>" />
-                        </div>
-                        <div class="input-control">
-                            <input type="submit" name="submit" class="btn btn-md btn-rounded" value="Login" />
-                        </div>
-                        <div id="signup-account">
-                            <p>Don't have an account? <a href="/register">Signup</a> </p>
-                        </div>
-                    </form>
+                    <div class="auth-visual" aria-hidden="true">
+                        <span>Good food. Good moments.</span>
+                    </div>
+                    <div class="auth-content">
+                        <p class="auth-eyebrow">Welcome back</p>
+                        <h1>Log in to your account.</h1>
+                        <p class="auth-description">Sign in to continue to Food Festive.</p>
+                        <form method="post">
+                            <div class="input-control">
+                                <label for="login-email">Email address</label>
+                                <input id="login-email" type="email" name="email" class="input-field input-md" value="<?= htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') ?>" autocomplete="email" required />
+                            </div>
+                            <div class="input-control">
+                                <label for="login-password">Password</label>
+                                <input id="login-password" type="password" name="password" class="input-field input-md" autocomplete="current-password" required />
+                            </div>
+                            <div class="input-control">
+                                <input type="submit" name="submit" class="btn btn-md btn-rounded" value="Login" />
+                            </div>
+                            <div id="signup-account">
+                                <p>Don't have an account? <a href="/register">Create one</a></p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
