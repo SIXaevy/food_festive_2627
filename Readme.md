@@ -14,21 +14,20 @@ After installation, make sure Docker Desktop is running before continuing.
 
 ---
 
-## 1. Create the Project Folder
+## 1. Open the Project Folder
 
-In VS Code or your file explorer, create a new folder named `food_festive`.
-
-Then inside that folder, create another folder named `src`.
-
-Your project folder should now look like this:
+The Docker Compose file is inside the `food_festive_2627` folder. From the parent `food_festive_3d` folder, the project is laid out like this:
 
 ```text
-food_festive/
-├── Dockerfile
-├── docker-compose.yml
-└── src/
-    └── index.php
+food_festive_3d/
+├── db_food_festive.sql
+└── food_festive_2627/
+    ├── Dockerfile
+    ├── docker-compose.yml
+    └── src/
 ```
+
+Run the commands below from `food_festive_3d`. If your terminal is already inside `food_festive_2627`, omit the `-f food_festive_2627\docker-compose.yml` argument.
 
 ## 2. Create the Dockerfile
 
@@ -72,6 +71,8 @@ services:
     container_name: 'db_server'
     environment:
       MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql_data:/var/lib/mysql
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
     container_name: 'dbms_software'
@@ -81,9 +82,12 @@ services:
       PMA_PASSWORD: root
     ports:
       - 9001:80
+
+volumes:
+  mysql_data:
 ```
 
-This is the current Docker Compose configuration used by the project. It includes the PHP app container, MySQL database, and phpMyAdmin services.
+This is the Docker Compose configuration used by the project. It includes the PHP app container, MySQL database, and phpMyAdmin services. The named `mysql_data` volume persists MySQL data when the container is recreated.
 
 ---
 
@@ -131,10 +135,10 @@ This code allows clean URLs and rewrites requests to `.php` files.
 
 Before opening the index page, make sure the `.htaccess` file is already inside the `src` folder.
 
-Run the following command in the project root:
+Run the following command from the `food_festive_3d` parent folder:
 
 ```bash
-docker-compose up --build
+docker compose -f food_festive_2627\docker-compose.yml up --build
 ```
 
 This command will:
@@ -154,23 +158,27 @@ You should see the PHP information page generated automatically by `phpinfo()`. 
 
 ## 8. Stop the Container
 
-When you are done, stop the container with:
+When you are done, stop the container with this command from `food_festive_3d`:
 
 ```bash
-docker-compose down
+docker compose -f food_festive_2627\docker-compose.yml down
 ```
+
+This keeps the `mysql_data` volume. Do not add `-v` unless you intend to delete the database and all its data.
 
 ---
 
 ## Final Project Structure
 
 ```text
-food_festive/
-├── Dockerfile
-├── docker-compose.yml
-└── src/
-    ├── .htaccess
-    └── index.php
+food_festive_3d/
+├── db_food_festive.sql
+└── food_festive_2627/
+    ├── Dockerfile
+    ├── docker-compose.yml
+    └── src/
+        ├── .htaccess
+        └── index.php
 ```
 
 This setup is the basic foundation for creating a PHP web application using Docker.

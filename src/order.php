@@ -1,48 +1,70 @@
 <?php
     include "session.php";
+    include "models/dish.php";
     include "require_login.php";
+
+    $dish_data = get_all_dishes();
+    $dishes = $dish_data['result'];
+    $dishes_by_id = [];
+
+    foreach ($dishes as $dish) {
+        $dishes_by_id[(int) $dish['id']] = $dish;
+    }
 
     $form_data = [
         'customer_name' => '',
         'food_item' => '',
-        'price' => 0,
         'quantity' => 0,
         'amount_paid' => 0
     ];
 
     $customerName = '';
     $foodItem = '';
+    $price = 0;
+    $quantity = 0;
+    $amountPaid = 0;
     $subtotal = 0;
     $discount = 0;
     $total = 0;
     $change = 0;
+    $errors = [];
+    $submitted = isset($_POST['submit']);
+    $selectedDishId = null;
 
-    if (isset($_POST['submit'])) {
+    if ($submitted) {
+        $form_data['customer_name'] = is_string($_POST['customer_name'] ?? null) ? $_POST['customer_name'] : '';
+        $form_data['food_item'] = is_string($_POST['food_item'] ?? null) ? $_POST['food_item'] : '';
+        $form_data['quantity'] = is_string($_POST['quantity'] ?? null) ? $_POST['quantity'] : '';
+        $form_data['amount_paid'] = is_string($_POST['amount_paid'] ?? null) ? $_POST['amount_paid'] : '';
 
-        $form_data['customer_name'] = $_POST['customer_name'] ?? '';
-        $form_data['food_item'] = $_POST['food_item'] ?? '';
-        $form_data['price'] = $_POST['price'] ?? 0;
-        $form_data['quantity'] = $_POST['quantity'] ?? 0;
-        $form_data['amount_paid'] = $_POST['amount_paid'] ?? 0;
-
-        $customerName = strtoupper($form_data['customer_name']);
-        $foodItem = ucwords($form_data['food_item']);
-
-        $price = (float) $form_data['price'];
-        $quantity = (int) $form_data['quantity'];
-        $amountPaid = (float) $form_data['amount_paid'];
-
-        $subtotal = $price * $quantity;
-
-        if ($subtotal >= 500) {
-            $discount = $subtotal * 0.10;
-        } else {
-            $discount = 0;
+        $selectedDishId = filter_var($form_data['food_item'], FILTER_VALIDATE_INT);
+        if ($selectedDishId === false || !isset($dishes_by_id[$selectedDishId])) {
+            $errors[] = "Please select a valid food item.";
+        }
+        if (trim($form_data['customer_name']) === '') {
+            $errors[] = "Customer name is required.";
+        }
+        $validatedQuantity = filter_var($form_data['quantity'], FILTER_VALIDATE_INT);
+        if ($validatedQuantity === false || $validatedQuantity < 1) {
+            $errors[] = "Quantity must be at least 1.";
+        }
+        if (!is_numeric($form_data['amount_paid']) || (float) $form_data['amount_paid'] < 0) {
+            $errors[] = "Amount paid must be zero or more.";
         }
 
-        $total = $subtotal - $discount;
+        if (empty($errors)) {
+            $dish = $dishes_by_id[$selectedDishId];
+            $customerName = strtoupper(trim($form_data['customer_name']));
+            $foodItem = $dish['name'];
+            $price = (float) $dish['price'];
+            $quantity = (int) $form_data['quantity'];
+            $amountPaid = (float) $form_data['amount_paid'];
 
-        $change = $amountPaid - $total;
+            $subtotal = $price * $quantity;
+            $discount = $subtotal >= 500 ? $subtotal * 0.10 : 0;
+            $total = $subtotal - $discount;
+            $change = $amountPaid - $total;
+        }
     }
 ?>
 
@@ -80,6 +102,7 @@
                             type="text"
                             id="customer_name"
                             name="customer_name"
+                            value="<?= htmlspecialchars($form_data['customer_name'], ENT_QUOTES, 'UTF-8') ?>"
                             required
                         >
 
@@ -96,25 +119,15 @@
                                 -- Select Food Item --
                             </option>
 
-                            <option value="lechon">
-                                Lechon
-                            </option>
-
-                            <option value="pancit">
-                                Pancit
-                            </option>
-
-                            <option value="barbecue">
-                                Barbecue
-                            </option>
-
-                            <option value="lumpia">
-                                Lumpia
-                            </option>
-
-                            <option value="halo-halo">
-                                Halo-Halo
-                            </option>
+                            <?php foreach ($dishes as $dish) { ?>
+                                <option
+                                    value="<?= (int) $dish['id'] ?>"
+                                    data-price="<?= htmlspecialchars((string) $dish['price'], ENT_QUOTES, 'UTF-8') ?>"
+                                    <?= (string) $form_data['food_item'] === (string) $dish['id'] ? 'selected' : '' ?>
+                                >
+                                    <?= htmlspecialchars($dish['name'], ENT_QUOTES, 'UTF-8') ?>
+                                </option>
+                            <?php } ?>
                         </select>
 
                         <label for="price">
@@ -127,6 +140,8 @@
                             name="price"
                             step="0.01"
                             min="0"
+                            value="<?= $price > 0 ? number_format($price, 2, '.', '') : '' ?>"
+                            readonly
                             required
                         >
 
@@ -139,6 +154,8 @@
                             id="quantity"
                             name="quantity"
                             min="1"
+                            step="1"
+                            value="<?= htmlspecialchars((string) $form_data['quantity'], ENT_QUOTES, 'UTF-8') ?>"
                             required
                         >
 
@@ -152,6 +169,7 @@
                             name="amount_paid"
                             step="0.01"
                             min="0"
+                            value="<?= htmlspecialchars((string) $form_data['amount_paid'], ENT_QUOTES, 'UTF-8') ?>"
                             required
                         >
 
@@ -163,9 +181,28 @@
 
                     </form>
 
+                    <script>
+                        const foodItemSelect = document.getElementById('food_item');
+                        const priceInput = document.getElementById('price');
+
+                        function updateDishPrice() {
+                            const selectedOption = foodItemSelect.options[foodItemSelect.selectedIndex];
+                            priceInput.value = selectedOption.dataset.price || '';
+                        }
+
+                        foodItemSelect.addEventListener('change', updateDishPrice);
+                        updateDishPrice();
+                    </script>
+
                     <div id="order-summary">
 
-                        <?php if (isset($_POST['submit'])) { ?>
+                        <?php if (!empty($errors)) { ?>
+                            <ul class="order-errors">
+                                <?php foreach ($errors as $error) { ?>
+                                    <li><?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?></li>
+                                <?php } ?>
+                            </ul>
+                        <?php } elseif ($submitted) { ?>
 
                             <h2>Order Summary</h2>
 
